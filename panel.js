@@ -1,9 +1,11 @@
 let enableButton = document.getElementById("enable");
 let disableButton = document.getElementById("disable");
 let tabId = chrome.devtools.inspectedWindow.tabId;
-let targetId;
+let _enabled = false;
 
 let displayEnabled = enabled => {
+  _enabled = enabled;
+
   if (enabled) {
     enableButton.classList.add("hidden");
     disableButton.classList.remove("hidden");
@@ -14,7 +16,7 @@ let displayEnabled = enabled => {
 };
 
 let addVirtualAuthenticator = () => {
-  chrome.debugger.sendCommand({targetId}, "WebAuthn.addVirtualAuthenticator", {
+  chrome.debugger.sendCommand({tabId}, "WebAuthn.addVirtualAuthenticator", {
     authenticatorId: "extension-virtual-authenticator",
     options: {
       protocol: "ctap2",
@@ -26,29 +28,26 @@ let addVirtualAuthenticator = () => {
 };
 
 let enable = () => {
-  chrome.debugger.attach({targetId}, "1.3", () => {
+  chrome.debugger.attach({tabId}, "1.3", () => {
     chrome.debugger.sendCommand(
-        {targetId}, "WebAuthn.enable", {}, addVirtualAuthenticator);
+        {tabId}, "WebAuthn.enable", {}, addVirtualAuthenticator);
+  });
+  chrome.debugger.onDetach.addListener(source => {
+    if (source.tabId == tabId)
+      displayEnabled(false);
   });
 };
 
 let disable = async () => {
-  chrome.debugger.detach({targetId}, () => {
+  chrome.debugger.detach({tabId}, () => {
     chrome.debugger.sendCommand(
-        {targetId}, "WebAuthn.disable", {}, () => displayEnabled(false));
+        {tabId}, "WebAuthn.disable", {}, () => displayEnabled(false));
   });
 };
 
-
-chrome.debugger.getTargets(targets => {
-  console.log(targets);
-  console.log(window.Main);
-  console.log(chrome.Main);
-  console.log(chrome);
-  console.log(chrome.devtools);
-  targetId = targets.find(target => target.tabId == tabId).id;
-  enableButton.disabled = false;
-  disableButton.disabled = false;
+window.addEventListener("beforeunload", () => {
+  if (_enabled)
+    chrome.debugger.detach({tabId}, () => {});
 });
 
 displayEnabled(false);

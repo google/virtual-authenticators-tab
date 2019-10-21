@@ -1,5 +1,5 @@
 {
-  "name": "Virtual Authenticator",
+  "name": "Virtual Authenticators",
   "version": "0.1",
   "description": "An extension that lets you create and manage virtual authenticators",
   "manifest_version": 2,
