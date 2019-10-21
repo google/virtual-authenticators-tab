@@ -1,18 +1,17 @@
 {
-  "name": "Virtual Authenticator",
-  "version": "0.1",
-  "description": "An extension that lets you create and manage virtual authenticators",
+  "name": "Virtual Authenticators Tab",
+  "version": "0.5",
+  "description": "A devtools tab to manage virtual authenticators",
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
   "manifest_version": 2,
   "permissions": [
-    "debugger", "storage", "tabs"
+    "debugger"
   ],
-  "browser_action": {
-    "default_title": "Manage Virtual Authenticators",
-    "default_popup": "popup.html"
-  },
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
-  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAg/wAu86aayfkDEvVAGgdtl8FS2/axn1JqdDl9awFDUdSLZrCNJ/7vMJBEUp3IpgzBMF+qFH9UZFQJIuyo2vRHnmIXDMVXEfYLmIJ9WfMYQnu8sUvcTilj7zCzaWSyo1/VqGeahsRX18VZBaMyOc4vauSojZFi66ZkR+dd9JoPhbxFFAMrcZkYeoIL27+ofKRy01gCBN/p3kQtowfvQtxGA+5irSqspXPtFIeTY20ZBhGaYR1KXu9wwa9ghtuQPf00Gy8+FyDzFwemawJ3KjlATokTjqEw9Z8ZM1kB6sS0q50xSJUhlbQ+/FMFN0owm7K5UHTSXGOALS8YPnHASeP3wIDAQAB"
+  "devtools_page": "devtools.html",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlaeHHorlc1nZFDV/Y9Yuu11IN1eQQ/tRo7nV80m8rJs5jWqRtZac3ohLp2TzWhE4ckGr06UebOwc8QaF6QZZORgf98keg4114TUKOq5G246wEpgS3iZowS3Kb5Tru5B64bX6mrmTMxukvT5BdPtfKHd5mm93+smrTUxSss2/OYiveRO9HNvAkVlxgEhb/KOiIg7Nzu222cLLA9blUr2sz5mutM5Ml1FaHY/K1rnc3s1pLDE4fbxnngIfjEQQiLqexzv5lhALxG/PHeE1rGNsKCKesV7+fb3IjpjtNEDGPsmQ5FUS/eD7vfAdmLgep2G6GsSZtrpgKDhLcO+mJQ3JxwIDAQAB"
 }

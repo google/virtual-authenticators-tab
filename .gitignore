@@ -1,0 +1,4 @@
+**/*.swp
+build/
+node_modules/
+generated/

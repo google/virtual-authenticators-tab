@@ -1,0 +1,25 @@
+{
+  "name": "virtual-authenticators-tab",
+  "version": "0.0.4",
+  "description": "",
+  "main": "devtools.js",
+  "dependencies": {
+    "lit-element": "^2.2.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --watch --mode=none",
+    "build": "webpack --mode=production && bash bin/package-extension.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Nina Satragno",
+  "license": "apache2",
+  "private": true
+}
