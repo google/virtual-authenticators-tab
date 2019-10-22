@@ -39,13 +39,15 @@ let renderAuthenticator = authenticator => {
   document.getElementById("empty-table").classList.add("hidden");
   authenticators.push(authenticator);
   let text = `
-    <td>${authenticator.id}</th>
-    <td>${authenticator.options.protocol}</th>
-    <td>${authenticator.options.transport}</th>
-    <td>${authenticator.options.hasResidentKey}</th>
-    <td>${authenticator.options.hasUserVerification}</th>
-    <td>0</th>
-    <td><button id="remove-${authenticator.id}">Remove</button></th>
+    <td class="code">${authenticator.id}</td>
+    <td class="align-center">${authenticator.options.protocol}</td>
+    <td class="align-center">${authenticator.options.transport}</td>
+    <td class="align-center">${authenticator.options.hasResidentKey}</td>
+    <td class="align-center">${authenticator.options.hasUserVerification}</td>
+    <td class="align-right">0</td>
+    <td class="align-center">
+      <button id="remove-${authenticator.id}">Remove</button>
+    </td>
   `;
   let row = document.createElement("tr");
   row.id = authenticator.id;
