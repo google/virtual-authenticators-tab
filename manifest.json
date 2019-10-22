@@ -2,6 +2,12 @@
   "name": "Virtual Authenticators",
   "version": "0.1",
   "description": "An extension that lets you create and manage virtual authenticators",
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
   "manifest_version": 2,
   "permissions": [
     "debugger", "storage", "tabs"
