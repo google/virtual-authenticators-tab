@@ -39,15 +39,23 @@
     .code {
       font-family: "monospace";
     }
+    .checkbox-container * {
+      cursor: pointer;
+    }
+    .checkbox-container {
+      align-items: center;
+    }
   </style>
 </head>
 <body>
   <div>
-    <button id="enable">Enable Virtual Authenticator Environment</button>
-    <button id="disable">Disable Virtual Authenticator Environment</button>
+    <span class="checkbox-container">
+      <input id="toggle" type="checkbox" name="toggle">
+      <label for="toggle">Enable Virtual Authenticator Environment</label>
+    </span>
   </div>
   <div id="authenticators" class="hidden">
-    <h3>Virtual Authenticators</h3>
+    <h3>Active Authenticators</h3>
     <table>
       <thead>
         <tr>
@@ -56,6 +64,7 @@
           <th>Transport</th>
           <th>Has resident keys</th>
           <th>Has user verification</th>
+          <th>Responds to request</th>
           <th class="align-right">Credentials</th>
           <th></th>
         </tr>
@@ -90,6 +99,9 @@
           </td>
           <td class="align-center">
             <input type="checkbox" id="has-uv" name="has-uv">
+          </td>
+          <td class="align-center">
+            <input type="checkbox" id="responds-to-user" name="responds-to-user">
           </td>
           <td>
           </td>

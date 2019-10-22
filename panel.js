@@ -1,5 +1,3 @@
-let enableButton = document.getElementById("enable");
-let disableButton = document.getElementById("disable");
 let tabId = chrome.devtools.inspectedWindow.tabId;
 let _enabled = false;
 let authenticators = [];
@@ -8,13 +6,9 @@ let displayEnabled = enabled => {
   _enabled = enabled;
 
   if (enabled) {
-    enableButton.classList.add("hidden");
-    disableButton.classList.remove("hidden");
     document.getElementById("authenticators").classList.remove("hidden");
   } else {
     authenticators.slice().forEach(removeAuthenticatorDisplay);
-    disableButton.classList.add("hidden");
-    enableButton.classList.remove("hidden");
     document.getElementById("authenticators").classList.add("hidden");
   }
 };
@@ -45,6 +39,7 @@ let renderAuthenticator = authenticator => {
     <td class="align-center">${authenticator.options.hasResidentKey}</td>
     <td class="align-center">${authenticator.options.hasUserVerification}</td>
     <td class="align-right">0</td>
+    <td class="align-center">${authenticator.options.automaticPresenceSimulation}</td>
     <td class="align-center">
       <button id="remove-${authenticator.id}">Remove</button>
     </td>
@@ -79,6 +74,7 @@ let enable = () => {
               transport: "usb",
               hasResidentKey: true,
               hasUserVerification: false,
+              automaticPresenceSimulation: true,
             },
           });
         });
@@ -100,8 +96,15 @@ window.addEventListener("beforeunload", () => {
 });
 
 displayEnabled(false);
-enableButton.addEventListener("click", () => enable());
-disableButton.addEventListener("click", () => disable());
+
+let toggle = document.getElementById("toggle");
+toggle.addEventListener("click", (e) => {
+  if (toggle.checked)
+    enable();
+  else
+    disable();
+});
+
 document.getElementById("add-authenticator").addEventListener("click", () => {
   addVirtualAuthenticator({
     options: {
@@ -110,6 +113,7 @@ document.getElementById("add-authenticator").addEventListener("click", () => {
       hasResidentKey: document.getElementById("has-rk").checked,
       hasUserVerification: document.getElementById("has-uv").checked,
       isUserVerified: document.getElementById("has-uv").checked,
+      automaticPresenceSimulation: document.getElementById("responds-to-user").checked,
     },
   });
 });
