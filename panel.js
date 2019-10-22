@@ -12,10 +12,19 @@ let displayEnabled = enabled => {
     disableButton.classList.remove("hidden");
     document.getElementById("authenticators").classList.remove("hidden");
   } else {
+    authenticators.slice().forEach(removeAuthenticatorDisplay);
     disableButton.classList.add("hidden");
     enableButton.classList.remove("hidden");
     document.getElementById("authenticators").classList.add("hidden");
   }
+};
+
+let removeAuthenticatorDisplay = authenticator => {
+  let row = document.getElementById(authenticator.id);
+  row.parentNode.removeChild(row);
+  authenticators.splice(authenticators.indexOf(authenticator), 1);
+  if (authenticators.length == 0)
+    document.getElementById("empty-table").classList.remove("hidden");
 };
 
 let removeAuthenticator = authenticator => {
@@ -23,13 +32,7 @@ let removeAuthenticator = authenticator => {
     {tabId}, "WebAuthn.removeVirtualAuthenticator", {
       authenticatorId: authenticator.id,
     },
-    () => {
-      let row = document.getElementById(authenticator.id);
-      row.parentNode.removeChild(row);
-      authenticators.splice(authenticators.indexOf(authenticator), 1);
-      if (authenticators.length == 0)
-        document.getElementById("empty-table").classList.remove("hidden");
-    });
+    () => removeAuthenticatorDisplay(authenticator));
 };
 
 let renderAuthenticator = authenticator => {
@@ -46,6 +49,7 @@ let renderAuthenticator = authenticator => {
   `;
   let row = document.createElement("tr");
   row.id = authenticator.id;
+  row.classList.add("authenticator-row");
   row.innerHTML = text;
   document.getElementById("authenticator-table-body").appendChild(row);
   document.getElementById(`remove-${authenticator.id}`).addEventListener(
@@ -78,16 +82,14 @@ let enable = () => {
         });
   });
   chrome.debugger.onDetach.addListener(source => {
-    if (source.tabId == tabId)
+    if (source.tabId == tabId) {
       displayEnabled(false);
+    }
   });
 };
 
 let disable = async () => {
-  chrome.debugger.detach({tabId}, () => {
-    chrome.debugger.sendCommand(
-        {tabId}, "WebAuthn.disable", {}, () => displayEnabled(false));
-  });
+  chrome.debugger.detach({tabId}, () => displayEnabled(false));
 };
 
 window.addEventListener("beforeunload", () => {
