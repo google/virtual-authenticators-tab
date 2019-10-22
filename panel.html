@@ -8,7 +8,7 @@
       min-width: 300px;
       font-family: "sans";
     }
-    div.center {
+    .center {
       width: 100%;
       text-align: center;
     }
@@ -18,10 +18,62 @@
   </style>
 </head>
 <body>
-  <h3>Virtual Authenticators</h3>
   <div>
     <button id="enable">Enable Virtual Authenticators</button>
     <button id="disable">Disable Virtual Authenticators</button>
+  </div>
+  <div id="authenticators" class="hidden">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Protocol</th>
+          <th>Transport</th>
+          <th>Has resident keys</th>
+          <th>Has user verification</th>
+          <th>Credentials</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody id="authenticator-table-body">
+        <tr id="empty-table" class="center">
+          <td colspan="99" >
+            No Authenticators
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>
+          </td>
+          <td>
+            <select id="protocol" name="protocol">
+              <option value="u2f">u2f</option>
+              <option value="ctap2">ctap2</option>
+            </select>
+          </td>
+          <td>
+            <select id="transport" name="transport">
+              <option value="usb">usb</option>
+              <option value="nfc">nfc</option>
+              <option value="ble">ble</option>
+              <option value="internal">internal</option>
+            </select>
+          </td>
+          <td>
+            <input type="checkbox" id="has-rk" name="has-rk">
+          </td>
+          <td>
+            <input type="checkbox" id="has-uv" name="has-uv">
+          </td>
+          <td>
+          </td>
+          <td>
+            <button id="add-authenticator">Add</button>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
   </div>
   <script src="panel.js"></script>
 </body>
