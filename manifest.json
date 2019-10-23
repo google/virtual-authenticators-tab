@@ -1,6 +1,6 @@
 {
   "name": "Virtual Authenticators",
-  "version": "0.1",
+  "version": "0.2",
   "description": "An extension that lets you create and manage virtual authenticators",
   "icons": {
     "16": "assets/icon16.png",
