@@ -51,9 +51,14 @@ let renderAuthenticator = authenticator => {
     <td class="code">${authenticator.id}</td>
     <td class="align-center">${authenticator.options.protocol}</td>
     <td class="align-center">${authenticator.options.transport}</td>
-    <td class="align-center">${authenticator.options.hasResidentKey}</td>
-    <td class="align-center">${authenticator.options.hasUserVerification}</td>
-    <td class="align-center">${authenticator.options.automaticPresenceSimulation}</td>
+    <td class="align-center">
+      <input type="checkbox" disabled
+             ${authenticator.options.hasResidentKey ? "checked" : ""}>
+    </td>
+    <td class="align-center">
+      <input type="checkbox" disabled
+             ${authenticator.options.hasUserVerification ? "checked" : ""}>
+    </td>
     <td class="align-center">
       <button id="remove-${authenticator.id}">Remove</button>
     </td>
@@ -97,7 +102,6 @@ let enable = () => {
               transport: "usb",
               hasResidentKey: true,
               hasUserVerification: false,
-              automaticPresenceSimulation: true,
             },
           });
         });
@@ -136,7 +140,6 @@ document.getElementById("add-authenticator").addEventListener("click", () => {
       hasResidentKey: document.getElementById("has-rk").checked,
       hasUserVerification: document.getElementById("has-uv").checked,
       isUserVerified: document.getElementById("has-uv").checked,
-      automaticPresenceSimulation: document.getElementById("responds-to-user").checked,
     },
   });
 });
