@@ -3,10 +3,16 @@ let _enabled = false;
 let authenticators = [];
 
 let displayError = error => {
+  let message;
+  try {
+    message = JSON.parse(error).message;
+  } catch (e) {
+    message = error;
+  }
   let container = document.getElementById("error-container");
   let row = document.createElement("div");
   row.classList.add("error-row");
-  row.innerText = error;
+  row.innerText = message;
   container.appendChild(row);
   window.setTimeout(() => container.removeChild(row), 30000);
 };
@@ -67,6 +73,10 @@ let addVirtualAuthenticator = authenticator => {
   chrome.debugger.sendCommand(
     {tabId}, "WebAuthn.addVirtualAuthenticator", authenticator,
     (response) => {
+      if (chrome.runtime.lastError) {
+        displayError(chrome.runtime.lastError.message);
+        return;
+      }
       authenticator.id = response.authenticatorId;
       renderAuthenticator(authenticator);
     });
@@ -76,6 +86,7 @@ let enable = () => {
   chrome.debugger.attach({tabId}, "1.3", () => {
     if (chrome.runtime.lastError) {
       displayError(chrome.runtime.lastError.message);
+      document.getElementById("toggle").checked = false;
       return;
     }
     chrome.debugger.sendCommand(
