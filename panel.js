@@ -38,8 +38,8 @@ let renderAuthenticator = authenticator => {
     <td class="align-center">${authenticator.options.transport}</td>
     <td class="align-center">${authenticator.options.hasResidentKey}</td>
     <td class="align-center">${authenticator.options.hasUserVerification}</td>
-    <td class="align-right">0</td>
     <td class="align-center">${authenticator.options.automaticPresenceSimulation}</td>
+    <td class="align-right">0</td>
     <td class="align-center">
       <button id="remove-${authenticator.id}">Remove</button>
     </td>
