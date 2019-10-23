@@ -45,6 +45,16 @@
     .checkbox-container {
       align-items: center;
     }
+    .error-row {
+      background-color: #FF6666;
+      border-color: #FF0000;
+      border: 3px solid;
+      border-radius: 6px;
+      color: #990000;
+      font-weight: bold;
+      padding: 10px;
+      margin: 10px 0;
+    }
   </style>
 </head>
 <body>
@@ -53,6 +63,8 @@
       <input id="toggle" type="checkbox" name="toggle">
       <label for="toggle">Enable Virtual Authenticator Environment</label>
     </span>
+  </div>
+  <div id="error-container">
   </div>
   <div id="authenticators" class="hidden">
     <h3>Active Authenticators</h3>

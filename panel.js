@@ -2,6 +2,15 @@ let tabId = chrome.devtools.inspectedWindow.tabId;
 let _enabled = false;
 let authenticators = [];
 
+let displayError = error => {
+  let container = document.getElementById("error-container");
+  let row = document.createElement("div");
+  row.classList.add("error-row");
+  row.innerText = error;
+  container.appendChild(row);
+  window.setTimeout(() => container.removeChild(row), 30000);
+};
+
 let displayEnabled = enabled => {
   _enabled = enabled;
 
@@ -66,6 +75,10 @@ let addVirtualAuthenticator = authenticator => {
 
 let enable = () => {
   chrome.debugger.attach({tabId}, "1.3", () => {
+    if (chrome.runtime.lastError) {
+      displayError(chrome.runtime.lastError.message);
+      return;
+    }
     chrome.debugger.sendCommand(
         {tabId}, "WebAuthn.enable", {}, () => {
           addVirtualAuthenticator({
