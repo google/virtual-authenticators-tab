@@ -22,9 +22,11 @@ let displayEnabled = enabled => {
 
   if (enabled) {
     document.getElementById("authenticators").classList.remove("hidden");
+    document.getElementById("splash").classList.add("hidden");
   } else {
     authenticators.slice().forEach(removeAuthenticatorDisplay);
     document.getElementById("authenticators").classList.add("hidden");
+    document.getElementById("splash").classList.remove("hidden");
   }
 };
 

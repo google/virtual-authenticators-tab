@@ -7,6 +7,10 @@
     body {
       min-width: 300px;
       font-family: "sans";
+      margin: 0;
+      font-family: roboto, ubuntu, arial, sans-serif;
+      font-size: 12px;
+      color: #5a5a5a;
     }
     .align-center {
       text-align: center;
@@ -18,7 +22,7 @@
       text-align: right;
     }
     .hidden {
-      display: none;
+      display: none !important;
     }
     table {
       width: 100%;
@@ -45,6 +49,8 @@
     }
     .checkbox-container {
       align-items: center;
+      display: inline-flex;
+      margin-top: 4px;
     }
     .error-row {
       background-color: #FF6666;
@@ -56,20 +62,44 @@
       padding: 10px;
       margin: 10px 0;
     }
-
     .small-column {
       width: 10em;
+    }
+    .toolbar {
+      background-color: #f3f3f3;
+      border-top: 1px solid #d0d0d0;
+      border-bottom: 1px solid #d0d0d0;
+      height: 26px;
+    }
+    .toolbar :hover {
+      color: black;
+    }
+    #splash {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
-  <div>
+  <div class="toolbar">
     <span class="checkbox-container">
       <input id="toggle" type="checkbox" name="toggle">
       <label for="toggle">Enable Virtual Authenticator Environment</label>
     </span>
   </div>
   <div id="error-container">
+  </div>
+  <div id="splash">
+    <p>
+      Enable the Virtual Authenticator Environment to begin testing.
+    </p>
   </div>
   <div id="authenticators" class="hidden">
     <h3>Active Authenticators</h3>
