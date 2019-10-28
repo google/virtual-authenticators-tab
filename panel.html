@@ -30,8 +30,9 @@
       width: 85%;
       margin: auto;
     }
-    table tr {
-      padding-top: 5px;
+    table td {
+      padding: 5px 0;
+      min-height: 20px;
     }
     tbody tr:nth-child(even) {
       background-color: #EEEEEE;
@@ -55,6 +56,10 @@
       padding: 10px;
       margin: 10px 0;
     }
+
+    .small-column {
+      width: 10em;
+    }
   </style>
 </head>
 <body>
@@ -72,16 +77,16 @@
       <thead>
         <tr>
           <th class="align-left">ID</th>
-          <th>Protocol</th>
-          <th>Transport</th>
-          <th>Has resident keys</th>
-          <th>Has user verification</th>
-          <th></th>
+          <th class="small-column">Protocol</th>
+          <th class="small-column">Transport</th>
+          <th class="small-column">Has resident keys</th>
+          <th class="small-column">Has user verification</th>
+          <th class="small-column"></th>
         </tr>
       </thead>
       <tbody id="authenticator-table-body">
         <tr id="empty-table" class="align-center">
-          <td colspan="99" >
+          <td colspan="99">
             No Authenticators
           </td>
         </tr>
