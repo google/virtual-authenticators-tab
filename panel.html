@@ -27,7 +27,6 @@
     table {
       width: 100%;
       border-spacing: 0;
-      padding: 10px;
     }
     table button {
       display: block;
@@ -35,11 +34,17 @@
       margin: auto;
     }
     table td {
-      padding: 5px 0;
+      padding: 5px;
       min-height: 20px;
     }
     tbody tr:nth-child(even) {
       background-color: #EEEEEE;
+    }
+    #empty-table {
+      background-color: #EEEEEE;
+    }
+    #empty-table td {
+      padding: 8px;
     }
     .code {
       font-family: "monospace";
@@ -60,7 +65,7 @@
       color: #990000;
       font-weight: bold;
       padding: 10px;
-      margin: 10px 0;
+      margin: 10px;
     }
     .small-column {
       width: 10em;
@@ -84,6 +89,9 @@
       right: 0;
       height: 100%;
       pointer-events: none;
+    }
+    div#authenticators {
+      margin: 10px;
     }
   </style>
 </head>
@@ -127,8 +135,8 @@
           </td>
           <td class="align-center">
             <select id="protocol" name="protocol">
-              <option value="u2f">u2f</option>
               <option value="ctap2">ctap2</option>
+              <option value="u2f">u2f</option>
             </select>
           </td>
           <td class="align-center">
