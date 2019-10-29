@@ -1,6 +1,7 @@
 let tabId = chrome.devtools.inspectedWindow.tabId;
 let _enabled = false;
 let authenticators = [];
+let pollingHandle;
 
 let displayError = error => {
   let message;
@@ -20,6 +21,7 @@ let displayError = error => {
 let displayEnabled = enabled => {
   _enabled = enabled;
 
+  document.getElementById("toggle").checked = enabled;
   if (enabled) {
     document.getElementById("authenticators").classList.remove("hidden");
     document.getElementById("splash").classList.add("hidden");
@@ -32,7 +34,9 @@ let displayEnabled = enabled => {
 
 let removeAuthenticatorDisplay = authenticator => {
   let row = document.getElementById(authenticator.id);
-  row.parentNode.removeChild(row);
+  let parent = row.parentNode;
+  parent.removeChild(row);
+  parent.removeChild(document.getElementById(`credentials-${authenticator.id}`));
   authenticators.splice(authenticators.indexOf(authenticator), 1);
   if (authenticators.length == 0)
     document.getElementById("empty-table").classList.remove("hidden");
@@ -69,11 +73,17 @@ let renderAuthenticator = authenticator => {
   row.id = authenticator.id;
   row.classList.add("authenticator-row");
   row.innerHTML = text;
-  document.getElementById("authenticator-table-body").appendChild(row);
+
+  let credentialsRow = document.createElement("tr");
+  credentialsRow.id = `credentials-${authenticator.id}`;
+  credentialsRow.innerHTML =
+    `<td colspan="99 class="no-credentials align-center">No Credentials</td>`;
+
+  let tableBody = document.getElementById("authenticator-table-body")
+  tableBody.appendChild(row);
+  tableBody.appendChild(credentialsRow);
   document.getElementById(`remove-${authenticator.id}`).addEventListener(
     "click", () => removeAuthenticator(authenticator));
-
-  displayEnabled(true);
 };
 
 let addVirtualAuthenticator = authenticator => {
@@ -89,6 +99,34 @@ let addVirtualAuthenticator = authenticator => {
     });
 };
 
+let startPollingForCredentials = () => {
+  pollingHandle = window.setInterval(() => {
+    authenticators.forEach(authenticator => {
+      chrome.debugger.sendCommand(
+        {tabId}, "WebAuthn.getCredentials", {authenticatorId: authenticator.id},
+        (response) => {
+          if (chrome.runtime.lastError) {
+            displayError(chrome.runtime.lastError.message);
+            return;
+          }
+          let row = document.getElementById(`credentials-${authenticator.id}`);
+          let oldTable = row.querySelector(".credentials-table");
+          if (oldTable)
+            row.removeChild(oldTable);
+          if (response.credentials.length === 0) {
+            row.classList.remove("hidden");
+            return;
+          }
+          row.classList.add("hidden");
+        });
+    })
+  }, 1000);
+};
+
+let stopPollingForCredentials = () => {
+  window.clearInterval(pollingHandle);
+};
+
 let enable = () => {
   chrome.debugger.attach({tabId}, "1.3", () => {
     if (chrome.runtime.lastError) {
@@ -98,6 +136,8 @@ let enable = () => {
     }
     chrome.debugger.sendCommand(
         {tabId}, "WebAuthn.enable", {}, () => {
+          displayEnabled(true);
+          startPollingForCredentials();
           addVirtualAuthenticator({
             options: {
               protocol: "ctap2",
@@ -116,6 +156,7 @@ let enable = () => {
 };
 
 let disable = async () => {
+  stopPollingForCredentials();
   chrome.debugger.detach({tabId}, () => displayEnabled(false));
 };
 
