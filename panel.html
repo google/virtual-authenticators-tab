@@ -21,54 +21,6 @@
   </div>
   <div id="authenticators" class="hidden">
     <h3>Active Authenticators</h3>
-    <table>
-      <thead>
-        <tr>
-          <th class="align-left">ID</th>
-          <th class="small-column">Protocol</th>
-          <th class="small-column">Transport</th>
-          <th class="small-column">Has resident keys</th>
-          <th class="small-column">Has user verification</th>
-          <th class="small-column"></th>
-        </tr>
-      </thead>
-      <tbody id="authenticator-table-body">
-        <tr id="empty-table" class="align-center">
-          <td colspan="99">
-            No Authenticators
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td>
-          </td>
-          <td class="align-center">
-            <select id="protocol" name="protocol">
-              <option value="ctap2">ctap2</option>
-              <option value="u2f">u2f</option>
-            </select>
-          </td>
-          <td class="align-center">
-            <select id="transport" name="transport">
-              <option value="usb">usb</option>
-              <option value="nfc">nfc</option>
-              <option value="ble">ble</option>
-              <option value="internal">internal</option>
-            </select>
-          </td>
-          <td class="align-center">
-            <input type="checkbox" id="has-rk" name="has-rk">
-          </td>
-          <td class="align-center">
-            <input type="checkbox" id="has-uv" name="has-uv">
-          </td>
-          <td>
-            <button id="add-authenticator">Add</button>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
   </div>
   <script src="./generated/main.js"></script>
 </body>
