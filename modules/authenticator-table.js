@@ -1,4 +1,5 @@
 import {LitElement, html, css} from "lit-element";
+import "./credential-table.js";
 
 class AuthenticatorTable extends LitElement {
   static get properties() {
@@ -25,9 +26,6 @@ class AuthenticatorTable extends LitElement {
       table td {
         padding: 5px;
         min-height: 20px;
-      }
-      tbody tr:nth-child(even) {
-        background-color: #EEEEEE;
       }
       #empty-table {
         background-color: #EEEEEE;
@@ -94,7 +92,7 @@ class AuthenticatorTable extends LitElement {
             detail: chrome.runtime.lastError.message,
             bubbles: true,
             composed: true,
-          }))
+          }));
           return;
         }
         authenticator.id = response.authenticatorId;
@@ -153,10 +151,27 @@ class AuthenticatorTable extends LitElement {
                 </button>
               </td>
             </tr>
+            <tr>
+              <td colspan="99">
+                <credential-table authenticatorid="${authenticator.id}">
+                </credential-table>
+              </td>
+            </tr>
             `
           )}
         </tbody>
-        <tfoot>
+      </table>
+      <h3>New Authenticator</h3>
+      <table>
+        <thead>
+          <tr>
+            <th class="align-left">ID</th>
+            <th class="small-column">Protocol</th>
+            <th class="small-column">Transport</th>
+            <th class="small-column">Has resident keys</th>
+            <th class="small-column">Has user verification</th>
+            <th class="small-column"></th>
+          </tr>
           <tr>
             <td>
             </td>
@@ -186,7 +201,7 @@ class AuthenticatorTable extends LitElement {
               <button @click="${this.addAuthenticator}">Add</button>
             </td>
           </tr>
-        </tfoot>
+        </thead>
       </table>
     `;
   }
