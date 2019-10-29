@@ -1,0 +1,24 @@
+{
+  "name": "virtual-authenticator-extension",
+  "version": "0.0.4",
+  "description": "",
+  "main": "devtools.js",
+  "dependencies": {
+    "lit-element": "^2.2.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "sso://user/nsatragno/virtual-authenticators-extension"
+  },
+  "author": "Nina Satragno",
+  "license": "MIT",
+  "private": true
+}

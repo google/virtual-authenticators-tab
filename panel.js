@@ -1,3 +1,7 @@
+"use strict";
+
+import {html, render} from "lit-html";
+
 let tabId = chrome.devtools.inspectedWindow.tabId;
 let _enabled = false;
 let authenticators = [];
