@@ -2,25 +2,21 @@
 
 import {html, render} from "lit-html";
 import "./modules/authenticator-table.js";
+import "./modules/display-error.js";
 
 let tabId = chrome.devtools.inspectedWindow.tabId;
 let _enabled = false;
-let pollingHandle;
 
 let displayError = error => {
-  let message;
-  try {
-    message = JSON.parse(error).message;
-  } catch (e) {
-    message = error;
-  }
-  let container = document.getElementById("error-container");
-  let row = document.createElement("div");
-  row.classList.add("error-row");
-  row.innerText = message;
-  container.appendChild(row);
-  window.setTimeout(() => container.removeChild(row), 30000);
+  let container = document.querySelector("display-error");
+  container.errors = container.errors.concat([error]);
+  window.setTimeout(
+    () => container.errors = container.errors.filter(e => e !== error), 15000);
 };
+
+window.addEventListener("on-error", event => {
+  displayError(event.detail);
+});
 
 let displayEnabled = enabled => {
   _enabled = enabled;

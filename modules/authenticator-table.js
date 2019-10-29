@@ -3,11 +3,11 @@ import {LitElement, html, css} from "lit-element";
 class AuthenticatorTable extends LitElement {
   static get properties() {
     return {
-      authenticators: { type: Array },
-      protocol: { type: String },
-      transport: { type: String },
-      hasResidentKey: { type: Boolean },
-      hasUserVerification: { type: Boolean },
+      authenticators: {type: Array},
+      protocol: {type: String},
+      transport: {type: String},
+      hasResidentKey: {type: Boolean},
+      hasUserVerification: {type: Boolean},
     };
   }
 
@@ -90,7 +90,11 @@ class AuthenticatorTable extends LitElement {
       "WebAuthn.addVirtualAuthenticator", {options: authenticator},
       (response) => {
         if (chrome.runtime.lastError) {
-          console.error(chrome.runtime.lastError.message);
+          this.dispatchEvent(new CustomEvent("on-error", {
+            detail: chrome.runtime.lastError.message,
+            bubbles: true,
+            composed: true,
+          }))
           return;
         }
         authenticator.id = response.authenticatorId;
