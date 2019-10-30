@@ -59,7 +59,6 @@ class AuthenticatorTable extends LitElement {
     this.hasResidentKey = true;
     this.hasUserVerification = false;
     this.tabId = chrome.devtools.inspectedWindow.tabId;
-    this.addAuthenticator();
   }
 
   protocolChanged(event) {
