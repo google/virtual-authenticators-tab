@@ -57,6 +57,11 @@ class CredentialTable extends LitElement {
     this.tabId = chrome.devtools.inspectedWindow.tabId;
   }
 
+  disconnectedCallback() {
+    window.clearInterval(this.intervalHandle);
+    super.disconnectedCallback();
+  }
+
   attributeChangedCallback(name, _, value) {
     if (name !== "authenticatorid" || !value)
       return;
@@ -64,7 +69,7 @@ class CredentialTable extends LitElement {
     this.intervalHandle = window.setInterval(() => {
       chrome.debugger.sendCommand(
         {tabId: this.tabId}, "WebAuthn.getCredentials",
-        {authenticatorId: value},
+        {authenticatorId: this.authenticatorId},
         (response) => {
           if (chrome.runtime.lastError) {
             this.dispatchEvent(new CustomEvent("on-error", {

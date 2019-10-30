@@ -33,30 +33,6 @@ let displayEnabled = enabled => {
   }
 };
 
-let startPollingForCredentials = () => {
-  pollingHandle = window.setInterval(() => {
-    authenticators.forEach(authenticator => {
-      chrome.debugger.sendCommand(
-        {tabId}, "WebAuthn.getCredentials", {authenticatorId: authenticator.id},
-        (response) => {
-          if (chrome.runtime.lastError) {
-            displayError(chrome.runtime.lastError.message);
-            return;
-          }
-          let row = document.getElementById(`credentials-${authenticator.id}`);
-          let oldTable = row.querySelector(".credentials-table");
-          if (oldTable)
-            row.removeChild(oldTable);
-          if (response.credentials.length === 0) {
-            row.classList.remove("hidden");
-            return;
-          }
-          row.classList.add("hidden");
-        });
-    })
-  }, 1000);
-};
-
 let enable = () => {
   chrome.debugger.attach({tabId}, "1.3", () => {
     if (chrome.runtime.lastError) {
