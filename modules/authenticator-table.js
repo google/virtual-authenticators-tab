@@ -143,7 +143,7 @@ class AuthenticatorTable extends LitElement {
           <span class="code">${authenticator.hasResidentKey ? "Yes" : "No"}</span>
         </div>
         <div>
-          <strong>Supports User Verification</strong>
+          <strong>Supports User Verification:</strong>
           <span class="code">${authenticator.hasUserVerification ? "Yes" : "No"}</span>
         </div>
         <br>
