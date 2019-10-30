@@ -10,6 +10,9 @@ class CredentialTable extends LitElement {
 
   static get styles() {
     return css`
+      .code {
+        font-family: monospace;
+      }
       table {
         width: 100%;
         border-spacing: 0;
@@ -59,7 +62,6 @@ class CredentialTable extends LitElement {
       return;
 
     this.intervalHandle = window.setInterval(() => {
-      console.log("polling for credentials");
       chrome.debugger.sendCommand(
         {tabId: this.tabId}, "WebAuthn.getCredentials",
         {authenticatorId: value},
@@ -102,7 +104,7 @@ class CredentialTable extends LitElement {
 
   render() {
     return html`
-      <h4>Credentials</h4>
+      <h3>Credentials</h3>
       <table>
         <thead>
           <tr>
@@ -118,7 +120,9 @@ class CredentialTable extends LitElement {
           ${this.credentials.length === 0 ? html`
             <tr class="align-center empty-table">
               <td colspan="99">
-                No Credentials
+                No Credentials. Try calling
+                <span class="code">navigator.credentials.create()</span>
+                from your website.
               </td>
             </tr>
           ` : html``}
