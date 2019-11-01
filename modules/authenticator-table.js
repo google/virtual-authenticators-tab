@@ -48,6 +48,10 @@ class AuthenticatorTable extends LitElement {
       .align-right {
         text-align: right;
       }
+      .section {
+        padding: 20px 0;
+        border-top: 1px solid #EEEEEE;
+      }
     `;
   }
 
@@ -122,35 +126,38 @@ class AuthenticatorTable extends LitElement {
       ` : html``}
 
       ${this.authenticators.map(authenticator => html`
-        <h3>
-          Authenticator <span class="code">${authenticator.id}</span>
-          <button @click=${this.removeAuthenticator.bind(this, authenticator)}"
-                  style="float: right;">
-            Remove Authenticator
-          </button>
-        </h3>
-        <div>
-          <strong>Protocol:</strong>
-          <span class="code">${authenticator.protocol}</span>
+        <div class="section">
+          <h3>
+            Authenticator <span class="code">${authenticator.id}</span>
+            <button @click=${this.removeAuthenticator.bind(this, authenticator)}"
+                    style="float: right;">
+              Remove Authenticator
+            </button>
+          </h3>
+          <div>
+            <strong>Protocol:</strong>
+            <span class="code">${authenticator.protocol}</span>
+          </div>
+          <div>
+            <strong>Transport:</strong>
+            <span class="code">${authenticator.transport}</span>
+          </div>
+          <div>
+            <strong>Supports Resident Keys:</strong>
+            <span class="code">${authenticator.hasResidentKey ? "Yes" : "No"}</span>
+          </div>
+          <div>
+            <strong>Supports User Verification:</strong>
+            <span class="code">${authenticator.hasUserVerification ? "Yes" : "No"}</span>
+          </div>
+          <br>
+          <credential-table authenticatorid="${authenticator.id}">
+          <hr>
         </div>
-        <div>
-          <strong>Transport:</strong>
-          <span class="code">${authenticator.transport}</span>
-        </div>
-        <div>
-          <strong>Supports Resident Keys:</strong>
-          <span class="code">${authenticator.hasResidentKey ? "Yes" : "No"}</span>
-        </div>
-        <div>
-          <strong>Supports User Verification:</strong>
-          <span class="code">${authenticator.hasUserVerification ? "Yes" : "No"}</span>
-        </div>
-        <br>
-        <credential-table authenticatorid="${authenticator.id}">
-        <hr>
         `
       )}
-      <h2>Add Authenticator</h2>
+      <div class="section">
+        <h2>Add Authenticator</h2>
         <div>
           <strong>Protocol:</strong>
           <select .value="${this.protocol}" @input="${this.protocolChanged}">
@@ -179,6 +186,7 @@ class AuthenticatorTable extends LitElement {
         </div>
         <br>
         <button @click="${this.addAuthenticator}">Add</button>
+      </div>
     `;
   }
 }
