@@ -1,5 +1,5 @@
 {
-  "name": "Virtual Authenticators Tab",
+  "name": "virtual-authenticators-tab",
   "version": "0.0.4",
   "description": "",
   "main": "devtools.js",
@@ -12,7 +12,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack --watch --mode=none"
+    "dev": "webpack --watch --mode=none",
+    "build": "webpack --mode=production && bash bin/package-extension.sh"
   },
   "repository": {
     "type": "git",
