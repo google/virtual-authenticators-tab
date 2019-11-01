@@ -1,5 +1,5 @@
 {
-  "name": "virtual-authenticator-extension",
+  "name": "Virtual Authenticators Tab",
   "version": "0.0.4",
   "description": "",
   "main": "devtools.js",
@@ -19,6 +19,6 @@
     "url": "sso://user/nsatragno/virtual-authenticators-extension"
   },
   "author": "Nina Satragno",
-  "license": "MIT",
+  "license": "apache2",
   "private": true
 }
