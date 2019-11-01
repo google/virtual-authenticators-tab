@@ -107,6 +107,18 @@ class CredentialTable extends LitElement {
       });
   }
 
+  export(credential) {
+    let pem = `-----BEGIN PRIVATE KEY-----
+${credential.privateKey}
+-----END PRIVATE KEY-----`;
+    let link = document.createElement("a");
+    document.body.appendChild(link);
+    link.download = "Private key.pem";
+    link.href = "data:application/x-pem-file;charset=utf-8," + encodeURIComponent(pem);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   render() {
     return html`
       <h3>Credentials</h3>
@@ -144,6 +156,9 @@ class CredentialTable extends LitElement {
               <td class="align-center">
                 <button @click="${this.removeCredential.bind(this, credential)}">
                   Remove
+                </button>
+                <button @click="${this.export.bind(this, credential)}">
+                  Export private key
                 </button>
               </td>
             </tr>
