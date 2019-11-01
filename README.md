@@ -37,3 +37,5 @@ Will produce a zip file suitable for upload to the chrome web store.
 ## Author
 
 Nina Satragno <nso@google.com>
+
+This is not an officially supported Google product
