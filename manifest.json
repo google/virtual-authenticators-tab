@@ -12,6 +12,5 @@
   "permissions": [
     "debugger"
   ],
-  "devtools_page": "devtools.html",
-  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlaeHHorlc1nZFDV/Y9Yuu11IN1eQQ/tRo7nV80m8rJs5jWqRtZac3ohLp2TzWhE4ckGr06UebOwc8QaF6QZZORgf98keg4114TUKOq5G246wEpgS3iZowS3Kb5Tru5B64bX6mrmTMxukvT5BdPtfKHd5mm93+smrTUxSss2/OYiveRO9HNvAkVlxgEhb/KOiIg7Nzu222cLLA9blUr2sz5mutM5Ml1FaHY/K1rnc3s1pLDE4fbxnngIfjEQQiLqexzv5lhALxG/PHeE1rGNsKCKesV7+fb3IjpjtNEDGPsmQ5FUS/eD7vfAdmLgep2G6GsSZtrpgKDhLcO+mJQ3JxwIDAQAB"
+  "devtools_page": "devtools.html"
 }
