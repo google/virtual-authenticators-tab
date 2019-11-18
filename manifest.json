@@ -1,6 +1,6 @@
 {
   "name": "Virtual Authenticators Tab",
-  "version": "0.5",
+  "version": "0.8",
   "description": "A devtools tab to manage virtual authenticators",
   "icons": {
     "16": "assets/icon16.png",
