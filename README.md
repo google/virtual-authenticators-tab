@@ -9,6 +9,9 @@ to devtools, allowing you to try WebAuthn without physical security keys.
 This extension will work best on Chrome 80 onwards, but you can still try it on
 78 and 79.
 
+[The extension is available at the chrome web store](
+https://chrome.google.com/webstore/detail/virtual-authenticators-ta/gafbpmlmeiikmhkhiapjlfjgdioafmja)
+
 ## Development
 
 To try the extension locally,
