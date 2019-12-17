@@ -30,6 +30,19 @@ class CredentialTable extends LitElement {
       table {
         width: 100%;
         border-spacing: 0;
+        border: rgb(170, 170, 170) 1px solid;
+      }
+      thead {
+        background-color: rgb(243, 243, 243);
+        height: 18px;
+      }
+      thead th {
+        font-weight: normal;
+        text-align: left;
+        border-bottom: rgb(170, 170, 170) 1px solid;
+        border-left: rgb(170, 170, 170) 1px solid;
+        border-right: rgb(170, 170, 170) 1px solid;
+        padding: 1px 4px;
       }
       table button {
         display: block;
@@ -39,12 +52,13 @@ class CredentialTable extends LitElement {
       table td {
         padding: 5px;
         min-height: 20px;
+        border-left: rgb(170, 170, 170) 1px solid;
+        border-right: rgb(170, 170, 170) 1px solid;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
       tbody tr:nth-child(even) {
-        background-color: #EEEEEE;
-      }
-      .empty-table {
-        background-color: #EEEEEE;
+        background-color: rgb(242, 247, 253);
       }
       .empty-table td {
         padding: 8px;
@@ -140,10 +154,11 @@ ${credential.privateKey}
         <thead>
           <tr>
             <th class="align-left">ID</th>
-            <th class="small-column">Is Resident Credential</th>
+            <th class="small-column">Is Resident</th>
             <th class="small-column">RP ID</th>
             <th class="small-column">User Handle</th>
             <th class="small-column">Sign Count</th>
+            <th class="small-column"></th>
             <th class="small-column"></th>
           </tr>
         </thead>
@@ -168,12 +183,14 @@ ${credential.privateKey}
               <td>${credential.userHandle || "<no user handle>"}</td>
               <td class="align-center">${credential.signCount}</td>
               <td class="align-center">
-                <button @click="${this.removeCredential.bind(this, credential)}">
+                <a @click="${this.export.bind(this, credential)}" href="#">
+                  Export
+                </a>
+              </td>
+              <td class="align-center">
+                <a @click="${this.removeCredential.bind(this, credential)}" href="#">
                   Remove
-                </button>
-                <button @click="${this.export.bind(this, credential)}">
-                  Export private key
-                </button>
+                </a>
               </td>
             </tr>
          `)}

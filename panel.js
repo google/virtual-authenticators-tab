@@ -38,9 +38,7 @@ let displayEnabled = enabled => {
   document.getElementById("toggle").checked = enabled;
   if (enabled) {
     document.getElementById("splash").classList.add("hidden");
-    document.getElementById("authenticators").classList.remove("hidden");
   } else {
-    document.getElementById("authenticators").classList.add("hidden");
     document.getElementById("authenticators").removeChild(
       document.querySelector("authenticator-table"));
     document.getElementById("splash").classList.remove("hidden");

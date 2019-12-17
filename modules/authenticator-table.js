@@ -62,9 +62,49 @@ class AuthenticatorTable extends LitElement {
       .align-right {
         text-align: right;
       }
-      .section {
-        padding: 20px 0;
-        border-top: 1px solid #EEEEEE;
+      .content {
+        background-color: white;
+        border-bottom: 1px solid #d0d0d0;
+        padding: 15px;
+        padding-left: 30px;
+      }
+      .detail-row {
+        padding-bottom: 10px;
+      }
+      .detail-title {
+        color: #888;
+        text-align: right;
+        width: 150px;
+        display: inline-block;
+      }
+      .detail-column {
+        margin-left: 10px;
+        text-align: left;
+        display: inline-block;
+      }
+      button :hover {
+        cursor: pointer;
+      }
+      button {
+        border-radius: 5px;
+        color: #1a73e8;
+        background-color: white;
+        border-style: solid;
+        border-width: 1px;
+        border-color: f9f9f9;
+        padding: 0 12px;
+        height: 24px;
+      }
+      select {
+        width: 7em;
+        border-radius: 5px;
+        color: #1a73e8;
+        background-color: white;
+        border-style: solid;
+        border-width: 1px;
+        border-color: f9f9f9;
+        padding: 0 5px;
+        height: 24px;
       }
     `;
   }
@@ -134,35 +174,45 @@ class AuthenticatorTable extends LitElement {
   render() {
     return html`
       ${this.authenticators.length === 0 ? html`
-        <h3 class="empty-table align-center">
-          No Authenticators. Try adding one using the controls below.
-        </h3>
+        <div class="content">
+          <p class="align-center">
+            No Authenticators. Try adding one using the controls below.
+          </p>
+        </div>
       ` : html``}
 
       ${this.authenticators.map(authenticator => html`
-        <div class="section">
-          <h3>
-            Authenticator <span class="code">${authenticator.id}</span>
-            <button @click=${this.removeAuthenticator.bind(this, authenticator)}"
-                    style="float: right;">
-              Remove Authenticator
-            </button>
-          </h3>
-          <div>
-            <strong>Protocol:</strong>
-            <span class="code">${authenticator.protocol}</span>
+        <div class="content">
+          <p>
+            <strong>Authenticator <span class="code">${authenticator.id}</span></strong>
+            <a @click=${this.removeAuthenticator.bind(this, authenticator)}"
+                    style="float: right;" href="#">
+              Remove
+            </a>
+          </p>
+          <div class="detail-row">
+            <div class="detail-title">Protocol</div>
+            <div class="detail-column">
+              <span class="code">${authenticator.protocol}</span>
+            </div>
           </div>
-          <div>
-            <strong>Transport:</strong>
-            <span class="code">${authenticator.transport}</span>
+          <div class="detail-row">
+            <div class="detail-title">Transport</div>
+            <div class="detail-column">
+              <span class="code">${authenticator.transport}</span>
+            </div>
           </div>
-          <div>
-            <strong>Supports Resident Keys:</strong>
-            <span class="code">${authenticator.hasResidentKey ? "Yes" : "No"}</span>
+          <div class="detail-row">
+            <div class="detail-title">Supports Resident Keys</div>
+            <div class="detail-column">
+              <span class="code">${authenticator.hasResidentKey ? "Yes" : "No"}</span>
+            </div>
           </div>
-          <div>
-            <strong>Supports User Verification:</strong>
-            <span class="code">${authenticator.hasUserVerification ? "Yes" : "No"}</span>
+          <div class="detail-row">
+            <div class="detail-title">Supports User Verification</div>
+            <div class="detail-column">
+              <span class="code">${authenticator.hasUserVerification ? "Yes" : "No"}</span>
+            </div>
           </div>
           <br>
           <credential-table authenticatorid="${authenticator.id}">
@@ -170,36 +220,48 @@ class AuthenticatorTable extends LitElement {
         </div>
         `
       )}
-      <div class="section">
-        <h2>Add Authenticator</h2>
-        <div>
-          <strong>Protocol:</strong>
-          <select .value="${this.protocol}" @input="${this.protocolChanged}">
-            <option value="ctap2">ctap2</option>
-            <option value="u2f">u2f</option>
-          </select>
+      <div class="content">
+        <strong>New Authenticator</strong>
+        <div class="detail-row">
+          <div class="detail-title">Protocol</div>
+          <div class="detail-column">
+            <select .value="${this.protocol}" @input="${this.protocolChanged}">
+              <option value="ctap2">ctap2</option>
+              <option value="u2f">u2f</option>
+            </select>
+          </div>
         </div>
-        <div>
-          <strong>Transport:</strong>
-          <select .value="${this.transport}" @input="${this.transportChanged}">
-            <option value="usb">usb</option>
-            <option value="nfc">nfc</option>
-            <option value="ble">ble</option>
-            <option value="internal">internal</option>
-          </select>
+        <div class="detail-row">
+          <div class="detail-title">Transport</div>
+          <div class="detail-column">
+            <select .value="${this.transport}" @input="${this.transportChanged}">
+              <option value="usb">usb</option>
+              <option value="nfc">nfc</option>
+              <option value="ble">ble</option>
+              <option value="internal">internal</option>
+            </select>
+          </div>
         </div>
-        <div>
-          <strong>Supports Resident Keys:</strong>
-          <input type="checkbox" .checked=${this.hasResidentKey}
-                 @input="${this.hasResidentKeyChanged}" name="has-rk">
+        <div class="detail-row">
+          <div class="detail-title">Supports Resident Keys</div>
+          <div class="detail-column">
+            <input type="checkbox" .checked=${this.hasResidentKey}
+                   @input="${this.hasResidentKeyChanged}" name="has-rk">
+          </div>
         </div>
-        <div>
-          <strong>Supports User Verification</strong>
-          <input type="checkbox" .checked="${this.hasUserVerification}"
-                 @input="${this.hasUserVerificationChanged}" name="has-uv">
+        <div class="detail-row">
+          <div class="detail-title">Supports User Verification</div>
+          <div class="detail-column">
+            <input type="checkbox" .checked="${this.hasUserVerification}"
+                   @input="${this.hasUserVerificationChanged}" name="has-uv">
+          </div>
         </div>
-        <br>
-        <button @click="${this.addAuthenticator}">Add</button>
+        <div class="detail-row">
+          <div class="detail-title"></div>
+          <div class="detail-column">
+            <button @click="${this.addAuthenticator}">Add</button>
+          </div>
+        </div>
       </div>
     `;
   }
