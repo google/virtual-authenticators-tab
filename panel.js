@@ -18,6 +18,10 @@ import {html, render} from "lit-html";
 import "./modules/authenticator-table.js";
 import "./modules/display-error.js";
 
+if (chrome.devtools.panels.themeName === "dark") {
+  document.getElementById("body").classList.add("-theme-with-dark-background");
+}
+
 let tabId = chrome.devtools.inspectedWindow.tabId;
 let _enabled = false;
 

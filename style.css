@@ -13,14 +13,67 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+:root {
+  --accent-color: #1a73e8;
+  --accent-fg-color: #1a73e8;
+  --accent-color-hover: #3b86e8;
+  --accent-text-color: #1a73e8;
+  --accent-button-color: #1a85cc;
+  --accent-button-color-hover: #2a95dc;
+  --active-control-bg-color: #5a5a5a;
+  --focus-bg-color: hsl(214, 40%, 92%);
+  --focus-ring-inactive-shadow-color: #e0e0e0;
+  --input-validation-error: #db1600;
+  --toolbar-bg-color: #f3f3f3;
+  --toolbar-hover-bg-color: #eaeaea;
+  --selection-fg-color: white;
+  --selection-inactive-fg-color: #5a5a5a;
+  --selection-inactive-bg-color: #dadada;
+  --tab-selected-fg-color: #333;
+  --tab-selected-bg-color: var(--toolbar-bg-color);
+  --drop-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.1);
+  --divider-color: #d0d0d0;
+  --focus-ring-inactive-shadow: 0 0 0 1px var(--focus-ring-inactive-shadow-color);
+  --item-selection-bg-color: #cfe8fc;
+  --item-selection-inactive-bg-color: #e0e0e0;
+  --main-bg-color: white;
+  --main-fg-color: rgb(48, 57, 66);
+}
+
+.-theme-with-dark-background {
+  --accent-color: #2a95dc;
+  --accent-fg-color: #cccccc;
+  --accent-text-color: #fff;
+  --accent-color-hover: #3aa5ec;
+  --accent-button-color: #1a85cc;
+  --accent-button-color-hover: #2a95dc;
+  --active-control-bg-color: #cdcdcd;
+  --focus-bg-color: hsl(214, 19%, 27%);
+  --focus-ring-inactive-shadow-color: #5a5a5a;
+  --toolbar-bg-color: #333333;
+  --toolbar-hover-bg-color: #202020;
+  --selection-fg-color: #cdcdcd;
+  --selection-inactive-fg-color: #cdcdcd;
+  --selection-inactive-bg-color: hsl(0, 0%, 28%);
+  --tab-selected-fg-color: #eaeaea;
+  --tab-selected-bg-color: black;
+  --drop-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2), 0 2px 4px 2px rgba(0, 0, 0, 0.2), 0 2px 6px 2px rgba(0, 0, 0, 0.1);
+  --divider-color: #525252;
+  --focus-ring-inactive-shadow: 0 0 0 1px var(--focus-ring-inactive-shadow-color);
+  --item-selection-bg-color: hsl(207, 88%, 22%);
+  --item-selection-inactive-bg-color: #454545;
+  --main-bg-color: rgb(39, 39, 39);
+  --main-fg-color: rgb(189, 198, 207);
+}
+
 body {
   min-width: 300px;
   font-family: "sans";
   margin: 0;
   font-family: roboto, ubuntu, arial, sans-serif;
   font-size: 12px;
-  color: rgb(48, 57, 66);
-  background-color: #f9f9f9;
+  color: var(--main-fg-color);
+  background-color: var(--toolbar-bg-color);
 }
 
 h1 {
@@ -43,8 +96,8 @@ h1 {
   margin-top: 4px;
 }
 .content {
-  background-color: white;
-  border-bottom: 1px solid #d0d0d0;
+  background-color: var(--main-bg-color);
+  border-bottom: 1px solid var(--divider-color);
   padding-left: 30px;
   padding: 15px;
 }

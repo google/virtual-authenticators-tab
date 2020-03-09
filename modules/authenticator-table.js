@@ -63,8 +63,8 @@ class AuthenticatorTable extends LitElement {
         text-align: right;
       }
       .content {
-        background-color: white;
-        border-bottom: 1px solid #d0d0d0;
+        background-color: var(--main-bg-color);
+        border-bottom: 1px solid var(--divider-color);
         padding: 15px;
         padding-left: 30px;
       }
@@ -72,7 +72,7 @@ class AuthenticatorTable extends LitElement {
         padding-bottom: 10px;
       }
       .detail-title {
-        color: #888;
+        color: var(--main-fg-color);
         text-align: right;
         width: 150px;
         display: inline-block;
@@ -82,13 +82,14 @@ class AuthenticatorTable extends LitElement {
         text-align: left;
         display: inline-block;
       }
-      button :hover {
+      button:hover {
         cursor: pointer;
+        background-color: var(--accent-button-color-hover);
       }
       button {
         border-radius: 5px;
-        color: #1a73e8;
-        background-color: white;
+        color: #fff;
+        background-color: var(--accent-button-color);
         border-style: solid;
         border-width: 1px;
         border-color: f9f9f9;
@@ -98,13 +99,29 @@ class AuthenticatorTable extends LitElement {
       select {
         width: 7em;
         border-radius: 5px;
-        color: #1a73e8;
-        background-color: white;
+        color: var(--accent-text-color);
+        background-color: var(--accent-bg-color);
         border-style: solid;
         border-width: 1px;
-        border-color: f9f9f9;
+        border-color: var(--accent-color);
         padding: 0 5px;
         height: 24px;
+      }
+      select:hover {
+        cursor: pointer;
+        background-color: var(--focus-bg-color);
+      }
+      a {
+        color: var(--accent-color);
+      }
+      a:visited {
+        color: var(--accent-color);
+      }
+      a:hover {
+        color: var(--accent-color-hover);
+      }
+      input[type='checkbox']:hover {
+        cursor: pointer;
       }
     `;
   }

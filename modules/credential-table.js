@@ -30,18 +30,18 @@ class CredentialTable extends LitElement {
       table {
         width: 100%;
         border-spacing: 0;
-        border: rgb(170, 170, 170) 1px solid;
+        border: var(--divider-color) 1px solid;
       }
       thead {
-        background-color: rgb(243, 243, 243);
+        background-color: var(--toolbar-bg-color);
         height: 18px;
       }
       thead th {
         font-weight: normal;
         text-align: left;
-        border-bottom: rgb(170, 170, 170) 1px solid;
-        border-left: rgb(170, 170, 170) 1px solid;
-        border-right: rgb(170, 170, 170) 1px solid;
+        border-bottom: var(--divider-color) 1px solid;
+        border-left: var(--divider-color) 1px solid;
+        border-right: var(--divider-color) 1px solid;
         padding: 1px 4px;
       }
       table button {
@@ -52,13 +52,13 @@ class CredentialTable extends LitElement {
       table td {
         padding: 5px;
         min-height: 20px;
-        border-left: rgb(170, 170, 170) 1px solid;
-        border-right: rgb(170, 170, 170) 1px solid;
+        border-left: var(--divider-color) 1px solid;
+        border-right: var(--divider-color) 1px solid;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
       tbody tr:nth-child(even) {
-        background-color: rgb(242, 247, 253);
+        background-color: var(--tab-selected-bg-color);
       }
       .empty-table td {
         padding: 8px;
@@ -74,6 +74,15 @@ class CredentialTable extends LitElement {
       }
       .align-right {
         text-align: right;
+      }
+      a {
+        color: var(--accent-color);
+      }
+      a:visited {
+        color: var(--accent-color);
+      }
+      a:hover {
+        color: var(--accent-color-hover);
       }
     `;
   }
