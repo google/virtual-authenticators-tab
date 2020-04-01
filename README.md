@@ -6,7 +6,7 @@ Virtual Authenticators Tab
 ## Introduction
 
 A Google Chrome extension for developers that adds a virtual authenticators tab
-to devtools, allowing you to try WebAuthn without physical security keys.
+to devtools, allowing you to debug and try WebAuthn without physical security keys.
 
 This extension will work best on Chrome 80 onwards, but you can still try it on
 78 and 79.
