@@ -27,6 +27,9 @@ class CredentialTable extends LitElement {
       .code {
         font-family: monospace;
       }
+      .table-wrapper {
+        overflow-x: auto;
+      }
       table {
         width: 100%;
         border-spacing: 0;
@@ -159,52 +162,54 @@ ${credential.privateKey}
   render() {
     return html`
       <h3>Credentials</h3>
-      <table>
-        <thead>
-          <tr>
-            <th class="align-left">ID</th>
-            <th class="small-column">Is Resident</th>
-            <th class="small-column">RP ID</th>
-            <th class="small-column">User Handle</th>
-            <th class="small-column">Sign Count</th>
-            <th class="small-column"></th>
-            <th class="small-column"></th>
-          </tr>
-        </thead>
-        <tbody>
-          ${this.credentials.length === 0 ? html`
-            <tr class="align-center empty-table">
-              <td colspan="99">
-                No Credentials. Try calling
-                <span class="code">navigator.credentials.create()</span>
-                from your website.
-              </td>
-            </tr>
-          ` : html``}
-          ${this.credentials.map(credential => html`
+      <div class="table-wrapper">
+        <table>
+          <thead>
             <tr>
-              <td class="code">${credential.credentialId}</td>
-              <td class="align-center">
-                <input type="checkbox" disabled
-                       ?checked="${credential.isResidentCredential}">
-              </td>
-              <td>${credential.rpId || "<unknown RP ID>"}</td>
-              <td>${credential.userHandle || "<no user handle>"}</td>
-              <td class="align-center">${credential.signCount}</td>
-              <td class="align-center">
-                <a @click="${this.export.bind(this, credential)}" href="#">
-                  Export
-                </a>
-              </td>
-              <td class="align-center">
-                <a @click="${this.removeCredential.bind(this, credential)}" href="#">
-                  Remove
-                </a>
-              </td>
+              <th class="align-left">ID</th>
+              <th class="small-column">Is Resident</th>
+              <th class="small-column">RP ID</th>
+              <th class="small-column">User Handle</th>
+              <th class="small-column">Sign Count</th>
+              <th class="small-column"></th>
+              <th class="small-column"></th>
             </tr>
-         `)}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            ${this.credentials.length === 0 ? html`
+              <tr class="align-center empty-table">
+                <td colspan="99">
+                  No Credentials. Try calling
+                  <span class="code">navigator.credentials.create()</span>
+                  from your website.
+                </td>
+              </tr>
+            ` : html``}
+            ${this.credentials.map(credential => html`
+              <tr>
+                <td class="code">${credential.credentialId}</td>
+                <td class="align-center">
+                  <input type="checkbox" disabled
+                         ?checked="${credential.isResidentCredential}">
+                </td>
+                <td>${credential.rpId || "<unknown RP ID>"}</td>
+                <td>${credential.userHandle || "<no user handle>"}</td>
+                <td class="align-center">${credential.signCount}</td>
+                <td class="align-center">
+                  <a @click="${this.export.bind(this, credential)}" href="#">
+                    Export
+                  </a>
+                </td>
+                <td class="align-center">
+                  <a @click="${this.removeCredential.bind(this, credential)}" href="#">
+                    Remove
+                  </a>
+                </td>
+              </tr>
+           `)}
+          </tbody>
+        </table>
+      </div>
     `;
   }
 }
