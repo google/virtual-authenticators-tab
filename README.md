@@ -1,6 +1,11 @@
 Virtual Authenticators Tab
 ==========================
 
+Deprecated
+==========
+
+This extension has been deprecated in favour of the [Chrome Devtools WebAuthn tab](https://developer.chrome.com/docs/devtools/webauthn/), which provides more functionality, is included with chrome, and is more polished. This repository is no longer maintained.
+
 ![virtual authenticators tab icon](/assets/icon.png?raw=true)
 
 ## Introduction
